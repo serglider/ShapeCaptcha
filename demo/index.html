@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Demo</title>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                background-color: #fcfcfc;
+                font-family: sans-serif;
+            }
+            .center-div {
+              position: absolute;
+              margin: auto;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              width: 350px;
+              height: 100px;
+              background-color: #ccc;
+              border-radius: 3px;
+              text-align: center;
+            }
+            canvas {
+                margin: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 99999;
+            }
+            #btn {
+                padding: 5px;
+            }
+            #result {
+                display: none;
+                color: green;
+                font-size: 200%;
+                font-weight: bold;
+            }
+            #foobar {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                width: 30%;
+                height: 40%;
+                background-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="foobar"></div>
+        <div class="center-div">
+            <p id="explanation">This is a PoC of the new not-a-bot test</p>
+            <p><button id="btn">I'm a human</button> <span id="result"></span></p>
+        </div>
+        <script src="shapecaptcha.min.js"></script>
+        <script>
+            const btn = document.getElementById('btn');
+            const result = document.getElementById('result');
+            const explanation = document.getElementById('explanation');
+            btn.addEventListener('click', () => {
+                ShapeCaptcha
+                    .init({
+                        // container: '#foobar',
+                        // timeout: 5,
+                        text: 'Note: a) one shape - one stroke, b) accepted shapes will be drawn green, c) you have 30 sec'
+                    })
+                    .then(() => {
+                        showhide();
+                        result.textContent = 'OK';
+                    })
+                    .catch(reason => {
+                        showhide();
+                        result.style.color = 'red';
+                        result.textContent = 'BOT?';
+                    });
+            });
+            function showhide() {
+                btn.style.display = 'none';
+                explanation.style.display = 'none';
+                result.style.display = 'inline';
+            }
+        </script>
+    </body>
+</html>
