@@ -1,15 +1,11 @@
-import ShapeDetectorFactory from './shape';
+import ShapeDetector from './shape';
 import run from './run';
 import funcs from './funcs';
 
 class ShapeCaptcha {
     constructor(options) {
         this.options = options;
-        const ShapeDetector = ShapeDetectorFactory();
-        this.shapeDetector = new ShapeDetector(ShapeDetector.defaultShapes, {
-            nbSamplePoints: 128,
-            threshold: 0.8
-        });
+        this.shapeDetector = new ShapeDetector();
         this.run = run.bind(this);
         for (let key of Object.keys(funcs)) {
             this[key] = funcs[key].bind(this);
@@ -21,7 +17,7 @@ export function init(opts) {
     const defaults = {
         timeout: 30, // sec
         items: 5,
-        container: '#foobar',
+        container: '',
         bgColor: 'black',
         drawColor: '#FFFF00',
         acceptColor: '#00FF00',

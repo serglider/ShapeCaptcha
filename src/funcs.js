@@ -21,6 +21,7 @@ export default {
 
         let f1 = 0.05;
         let font1 = Math.round(height * f1);
+        ctx.font = `${font1}px sans-serif`;
         while (ctx.measureText(text1).width > width) {
             f1 *= 0.95;
             font1 = Math.round(height * f1);
@@ -31,6 +32,7 @@ export default {
         let f2 = 0.03;
         let font2 = Math.round(height * f2);
         if ( text2 ) {
+            ctx.font = `${font2}px sans-serif`;
             while (ctx.measureText(text2).width > width) {
                 f2 *= 0.95;
                 font2 = Math.round(height * f2);
@@ -134,7 +136,7 @@ export default {
         const shape = this.shapeDetector.spot(dots);
         const color = '#' + Math.floor(Math.random() * 16777215).toString(16);
         return {
-            shape: shape.pattern,
+            shape,
             dots,
             color
         };

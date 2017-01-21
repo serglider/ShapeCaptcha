@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Demo</title>
+        <link rel="stylesheet" href="dat-gui/dat.gui.css">
         <style>
             html, body {
                 margin: 0;
@@ -45,7 +46,7 @@
                 position: absolute;
                 top: 5px;
                 right: 5px;
-                width: 30%;
+                width: 50%;
                 height: 40%;
                 background-color: black;
             }
@@ -57,15 +58,34 @@
             <p id="explanation">This is a PoC of the new not-a-bot test</p>
             <p><button id="btn">I'm a human</button> <span id="result"></span></p>
         </div>
+        <script src="dat-gui/dat.gui.min.js"></script>
         <script src="shapecaptcha.min.js"></script>
         <script>
             const btn = document.getElementById('btn');
             const result = document.getElementById('result');
             const explanation = document.getElementById('explanation');
+
+            var FizzyText = function() {
+              this.message = 'Note: a) one shape - one stroke, b) accepted shapes will be drawn green, c) you have 30 sec';
+              this.speed = 0.8;
+              this.displayOutline = false;
+              this.explode = function() {};
+              // Define render logic ...
+            };
+
+            window.onload = function() {
+              var text = new FizzyText();
+              var gui = new dat.GUI();
+              gui.add(text, 'message');
+              gui.add(text, 'speed', -5, 5);
+              gui.add(text, 'displayOutline');
+              gui.add(text, 'explode');
+            };
+
             btn.addEventListener('click', () => {
                 ShapeCaptcha
                     .init({
-                        // container: '#foobar',
+                        container: '#foobar',
                         // timeout: 5,
                         text: 'Note: a) one shape - one stroke, b) accepted shapes will be drawn green, c) you have 30 sec'
                     })
