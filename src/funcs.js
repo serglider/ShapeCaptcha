@@ -4,7 +4,7 @@ export default {
         if (!selector) {
             return document.body;
         }
-        const container = document.querySelector(this.options.container);
+        const container = document.querySelector(selector);
         return container ? container : document.body;
     },
 
@@ -28,7 +28,7 @@ export default {
             ctx.font = `${font1}px sans-serif`;
         }
 
-        const text2 =  this.options.text;
+        const text2 =  this.options.helperText;
         let f2 = 0.03;
         let font2 = Math.round(height * f2);
         if ( text2 ) {
@@ -71,9 +71,9 @@ export default {
         ctx.fillStyle = this.options.textColor;
         ctx.font = `${s.font1}px sans-serif`;
         ctx.fillText(text, ctx.canvas.width / 2, s.text1Y);
-        if ( this.options.text ) {
+        if ( this.options.helperText ) {
             ctx.font = `${s.font2}px sans-serif`;
-            ctx.fillText(this.options.text, ctx.canvas.width / 2, s.text2Y);
+            ctx.fillText(this.options.helperText, ctx.canvas.width / 2, s.text2Y);
         }
     },
 

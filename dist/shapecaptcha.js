@@ -65,9 +65,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _shape2 = _interopRequireDefault(_shape);
 	
-	var _run = __webpack_require__(2);
+	var _resolver = __webpack_require__(2);
 	
-	var _run2 = _interopRequireDefault(_run);
+	var _resolver2 = _interopRequireDefault(_resolver);
 	
 	var _funcs = __webpack_require__(3);
 	
@@ -82,7 +82,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    this.options = options;
 	    this.shapeDetector = new _shape2.default();
-	    this.run = _run2.default.bind(this);
+	    this.resolver = _resolver2.default.bind(this);
 	    var _iteratorNormalCompletion = true;
 	    var _didIteratorError = false;
 	    var _iteratorError = undefined;
@@ -114,18 +114,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	        timeout: 30, // sec
 	        items: 5,
 	        container: '',
-	        bgColor: 'black',
+	        bgColor: '#000',
 	        drawColor: '#FFFF00',
 	        acceptColor: '#00FF00',
-	        textColor: 'black',
+	        textColor: '#000',
 	        textBgColor: '#CCC',
-	        text: '',
+	        helperText: '',
 	        drawLineWidth: 4,
 	        successLineWidth: 8
 	    };
 	    var options = Object.assign({}, defaults, opts);
 	    var sc = new ShapeCaptcha(options);
-	    return new Promise(sc.run);
+	    return new Promise(sc.resolver);
 	}
 
 /***/ },
@@ -2720,8 +2720,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.default = run;
-	function run(resolve, reject) {
+	exports.default = resolver;
+	function resolver(resolve, reject) {
 	    var container = this.getContainer(this.options.container);
 	    var self = this;
 	    var shapes = [];
@@ -2786,8 +2786,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        self.drawTaskText(ctx, taskText);
 	        ctx.fillStyle = self.options.bgColor;
 	        ctx.fillRect(0, self.sizes.explanation.height, canvas.width, canvas.height);
+	        ctx.lineWidth = done ? self.options.successLineWidth : self.options.drawLineWidth;
 	        if (shapes.length) {
-	            ctx.lineWidth = done ? self.options.successLineWidth : self.options.drawLineWidth;
 	            shapes.forEach(function (item) {
 	                self.drawDots(ctx, item.dots, self.options.acceptColor);
 	            });
@@ -2815,7 +2815,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (!selector) {
 	            return document.body;
 	        }
-	        var container = document.querySelector(this.options.container);
+	        var container = document.querySelector(selector);
 	        return container ? container : document.body;
 	    },
 	    getSizes: function getSizes(container, ctx, text1) {
@@ -2839,7 +2839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            ctx.font = font1 + 'px sans-serif';
 	        }
 	
-	        var text2 = this.options.text;
+	        var text2 = this.options.helperText;
 	        var f2 = 0.03;
 	        var font2 = Math.round(height * f2);
 	        if (text2) {
@@ -2880,9 +2880,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        ctx.fillStyle = this.options.textColor;
 	        ctx.font = s.font1 + 'px sans-serif';
 	        ctx.fillText(text, ctx.canvas.width / 2, s.text1Y);
-	        if (this.options.text) {
+	        if (this.options.helperText) {
 	            ctx.font = s.font2 + 'px sans-serif';
-	            ctx.fillText(this.options.text, ctx.canvas.width / 2, s.text2Y);
+	            ctx.fillText(this.options.helperText, ctx.canvas.width / 2, s.text2Y);
 	        }
 	    },
 	    getRandItemSet: function getRandItemSet(n) {

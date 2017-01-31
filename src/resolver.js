@@ -1,4 +1,4 @@
-export default function run(resolve, reject) {
+export default function resolver(resolve, reject) {
     const container = this.getContainer(this.options.container);
     const self = this;
     const shapes = [];
@@ -61,8 +61,8 @@ export default function run(resolve, reject) {
         self.drawTaskText(ctx, taskText);
         ctx.fillStyle = self.options.bgColor;
         ctx.fillRect(0, self.sizes.explanation.height, canvas.width, canvas.height);
+        ctx.lineWidth = done ? self.options.successLineWidth : self.options.drawLineWidth;
         if (shapes.length) {
-            ctx.lineWidth = done ? self.options.successLineWidth : self.options.drawLineWidth;
             shapes.forEach(item => {
                 self.drawDots(ctx, item.dots, self.options.acceptColor);
             });

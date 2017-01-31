@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const loadPlugins = require('gulp-load-plugins');
 const del = require('del');
 const path = require('path');
-// const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const manifest = require('./package.json');
 const $ = loadPlugins();
