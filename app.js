@@ -34,9 +34,7 @@ window.onload = function app() {
     gui.add(options, 'successLineWidth', 2, 16).step(1);
 
     trigger.addEventListener('change', () => {
-        ShapeCaptcha
-            .init(options)
-            .then(() => {
+        ShapeCaptcha.init().then(() => {
                 submitButton.disabled = false;
                 trigger.checked = true;
                 trigger.parentNode.style.color = 'green';
