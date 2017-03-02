@@ -34,8 +34,6 @@ window.onload = function app() {
     gui.add(options, 'drawLineWidth', 2, 16).step(1);
     gui.add(options, 'successLineWidth', 2, 16).step(1);
 
-    console.log(ShapeCaptcha);
-
     trigger.addEventListener('change', () => {
         ShapeCaptcha.start().then(() => {
                 submitButton.disabled = false;
