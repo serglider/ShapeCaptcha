@@ -1,8 +1,32 @@
 const path = require('path');
+const webpack = require('webpack');
+const cleanWebpackPlugin = require('clean-webpack-plugin');
+const name = 'ShapeCaptcha';
 const targets = ['dist', 'demo'];
+const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
+    compress: {
+        warnings: false
+    },
+    output: {
+        comments: false
+    },
+    sourceMap: true
+});
+const cleanPlugin = new cleanWebpackPlugin(targets, {
+    exclude: ['app.js', 'index.html', 'dat-gui']
+});
 
-module.exports = targets.map(getConfig);
-
+module.exports = env => {
+    return targets.map(getConfig).map(cfg => {
+        if (env === 'production') {
+            cfg.plugins = [uglifyPlugin];
+            cfg.output.filename = `${name.toLowerCase()}.min.js`;
+        }else {
+            cfg.plugins = [cleanPlugin];
+        }
+        return cfg;
+    });
+};
 
 function getConfig(target) {
 
@@ -10,27 +34,29 @@ function getConfig(target) {
         entry: './src/index.js',
         output: {
             path: path.resolve(__dirname, target),
-            filename: 'shapecaptcha.js',
-            library: "ShapeCaptcha",
+            filename: `${name.toLowerCase()}.js`,
+            library: name,
             libraryTarget: 'umd'
         },
         devtool: 'source-map',
-        context: __dirname,
         target: 'web',
         module: {
             rules: [{
                     enforce: 'pre',
                     test: /\.js$/,
-                    include: 'src',
+                    include: path.resolve(__dirname, 'src'),
                     loader: 'eslint-loader',
                 },
                 {
                     test: /\.js$/,
-                    include: 'src',
+                    include: path.resolve(__dirname, 'src'),
                     loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015']
+                    }
                 },
             ],
-        },
+        }
     };
 
     return config;

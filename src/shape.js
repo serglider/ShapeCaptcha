@@ -253,7 +253,7 @@ class ShapeDetector {
                     x: 140.17500305175776,
                     y: 420.52500915527327
                 }],
-                name: "triangle"
+                name: 'triangle'
             },
             {
                 points: [{
@@ -338,7 +338,7 @@ class ShapeDetector {
                     x: 280.3500061035155,
                     y: 140.17500305175776
                 }],
-                name: "triangle"
+                name: 'triangle'
             },
             {
                 points: [{
@@ -423,7 +423,7 @@ class ShapeDetector {
                     x: 420.52500915527327,
                     y: 420.52500915527327
                 }],
-                name: "triangle"
+                name: 'triangle'
             },
             {
                 points: [{
@@ -508,7 +508,7 @@ class ShapeDetector {
                     x: 140.17500305175776,
                     y: 420.52500915527327
                 }],
-                name: "triangle"
+                name: 'triangle'
             },
             {
                 points: [{
@@ -593,7 +593,7 @@ class ShapeDetector {
                     x: 420.52500915527327,
                     y: 420.52500915527327
                 }],
-                name: "triangle"
+                name: 'triangle'
             },
             {
                 points: [{
@@ -678,7 +678,7 @@ class ShapeDetector {
                     x: 280.3500061035155,
                     y: 140.17500305175776
                 }],
-                name: "triangle"
+                name: 'triangle'
             },
             {
                 points: [{
@@ -790,7 +790,7 @@ class ShapeDetector {
                     x: 140.17500305175776,
                     y: 140.17500305175776
                 }],
-                name: "square"
+                name: 'square'
             },
             {
                 points: [{
@@ -902,7 +902,7 @@ class ShapeDetector {
                     x: 420.52500915527327,
                     y: 140.17500305175776
                 }],
-                name: "square"
+                name: 'square'
             },
             {
                 points: [{
@@ -1014,7 +1014,7 @@ class ShapeDetector {
                     x: 420.52500915527327,
                     y: 420.52500915527327
                 }],
-                name: "square"
+                name: 'square'
             },
             {
                 points: [{
@@ -1126,7 +1126,7 @@ class ShapeDetector {
                     x: 140.17500305175776,
                     y: 420.52500915527327
                 }],
-                name: "square"
+                name: 'square'
             },
             {
                 points: [{
@@ -1238,7 +1238,7 @@ class ShapeDetector {
                     x: 140.17500305175776,
                     y: 420.52500915527327
                 }],
-                name: "square"
+                name: 'square'
             },
             {
                 points: [{
@@ -1350,7 +1350,7 @@ class ShapeDetector {
                     x: 420.52500915527327,
                     y: 420.52500915527327
                 }],
-                name: "square"
+                name: 'square'
             },
             {
                 points: [{
@@ -1462,7 +1462,7 @@ class ShapeDetector {
                     x: 420.52500915527327,
                     y: 140.17500305175776
                 }],
-                name: "square"
+                name: 'square'
             },
             {
                 points: [{
@@ -1574,7 +1574,7 @@ class ShapeDetector {
                     x: 140.17500305175776,
                     y: 140.17500305175776
                 }],
-                name: "square"
+                name: 'square'
             },
             {
                 points: [{
@@ -1689,7 +1689,7 @@ class ShapeDetector {
                     x: 420.52500915527327,
                     y: 280.35000610351545
                 }],
-                name: "circle"
+                name: 'circle'
             },
             {
                 points: [{
@@ -1804,7 +1804,7 @@ class ShapeDetector {
                     x: 420.52500915527327,
                     y: 280.35000610351557
                 }],
-                name: "circle"
+                name: 'circle'
             },
             {
                 points: [{
@@ -1919,7 +1919,7 @@ class ShapeDetector {
                     x: 140.17500305175776,
                     y: 280.35000610351557
                 }],
-                name: "circle"
+                name: 'circle'
             },
             {
                 points: [{
@@ -2034,7 +2034,7 @@ class ShapeDetector {
                     x: 140.17500305175776,
                     y: 280.35000610351545
                 }],
-                name: "circle"
+                name: 'circle'
             },
             {
                 points: [{
@@ -2149,7 +2149,7 @@ class ShapeDetector {
                     x: 280.35000610351545,
                     y: 420.52500915527327
                 }],
-                name: "circle"
+                name: 'circle'
             },
             {
                 points: [{
@@ -2264,7 +2264,7 @@ class ShapeDetector {
                     x: 280.35000610351545,
                     y: 140.17500305175776
                 }],
-                name: "circle"
+                name: 'circle'
             },
             {
                 points: [{
@@ -2379,7 +2379,7 @@ class ShapeDetector {
                     x: 280.35000610351557,
                     y: 140.17500305175776
                 }],
-                name: "circle"
+                name: 'circle'
             },
             {
                 points: [{
@@ -2494,7 +2494,7 @@ class ShapeDetector {
                     x: 280.35000610351557,
                     y: 420.52500915527327
                 }],
-                name: "circle"
+                name: 'circle'
             }
         ];
         this.threshold = 0.85;

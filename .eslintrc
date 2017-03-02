@@ -5,6 +5,7 @@
   },
   "extends": "eslint:recommended",
   "rules": {
+      "quotes": ["error", "single"],
       "no-console": 0
       },
   "env": {

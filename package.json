@@ -1,29 +1,35 @@
 {
-  "name": "shapecaptcha",
-  "version": "0.0.6",
-  "description": "later",
-  "main": "dist/shapecaptcha.js",
-  "scripts": {
-    "build": "webpack",
-    "start": "webpack --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/serglider/ShapeCaptcha.git"
-  },
-  "keywords": [],
-  "author": "serglider",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/serglider/ShapeCaptcha/issues"
-  },
-  "homepage": "https://github.com/serglider/ShapeCaptcha",
-  "devDependencies": {
-    "babel-core": "6.14.0",
-    "babel-loader": "^6.2.5",
-    "babel-polyfill": "6.13.0",
-    "babel-preset-latest": "6.14.0",
-    "eslint-loader": "^1.6.3",
-    "webpack": "^2.2.1"
-  }
+    "name": "shapecaptcha",
+    "version": "0.0.6",
+    "description": "later",
+    "main": "dist/shapecaptcha.js",
+    "scripts": {
+        "prebuild": "webpack --env dev",
+        "build": "webpack --env production",
+        "start": "webpack --watch --env dev",
+        "precommit": "npm --no-git-tag-version -f version patch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/serglider/ShapeCaptcha.git"
+    },
+    "keywords": [],
+    "author": "serglider",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/serglider/ShapeCaptcha/issues"
+    },
+    "homepage": "https://github.com/serglider/ShapeCaptcha",
+    "devDependencies": {
+        "babel-core": "^6.23.1",
+        "babel-loader": "^6.3.2",
+        "babel-preset-env": "^1.1.10",
+        "babel-preset-es2015": "^6.22.0",
+        "clean-webpack-plugin": "^0.1.15",
+        "copyfiles": "^1.2.0",
+        "eslint": "^3.16.1",
+        "eslint-loader": "^1.6.3",
+        "husky": "^0.13.1",
+        "webpack": "^2.2.1"
+    }
 }

@@ -10,6 +10,7 @@ window.onload = function app() {
         timeout: 30, // sec
         items: 5,
         container: '',
+        font: '',
         bgColor: '#000',
         drawColor: '#FFFF00',
         acceptColor: '#00FF00',
@@ -33,8 +34,10 @@ window.onload = function app() {
     gui.add(options, 'drawLineWidth', 2, 16).step(1);
     gui.add(options, 'successLineWidth', 2, 16).step(1);
 
+    console.log(ShapeCaptcha);
+
     trigger.addEventListener('change', () => {
-        ShapeCaptcha.init().then(() => {
+        ShapeCaptcha.start().then(() => {
                 submitButton.disabled = false;
                 trigger.checked = true;
                 trigger.parentNode.style.color = 'green';
