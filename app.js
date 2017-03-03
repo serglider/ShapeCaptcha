@@ -1,6 +1,12 @@
-/*global ShapeCaptcha dat*/
+/*global ShapeCaptcha dat FontFaceObserver*/
+const fontFamily = 'Indie Flower';
+const fo = new FontFaceObserver(fontFamily);
 
-window.onload = function app() {
+fo.load().then(app, function () {
+  console.log(`Font ${fontFamily} is not available`);
+});
+
+function app() {
     const $ = id => document.getElementById(id);
     const guiContainer = $('guiContainer');
     const trigger = $('trigger');
@@ -10,14 +16,14 @@ window.onload = function app() {
         timeout: 30, // sec
         items: 5,
         container: '',
-        font: '',
-        bgColor: '#000',
-        drawColor: '#FFFF00',
+        font: 'Indie Flower',
+        bgColor: 'rgba(0,0,0,0.01)',
+        drawColor: '#000',
         acceptColor: '#00FF00',
         textColor: '#000',
-        textBgColor: '#CCC',
+        textBgColor: 'rgba(0,0,0,0.01)',
         helperText: '',
-        drawLineWidth: 4,
+        drawLineWidth: 8,
         successLineWidth: 8
     };
     const gui = new dat.GUI({ autoPlace: false });
@@ -35,7 +41,7 @@ window.onload = function app() {
     gui.add(options, 'successLineWidth', 2, 16).step(1);
 
     trigger.addEventListener('change', () => {
-        ShapeCaptcha.start().then(() => {
+        ShapeCaptcha.start(options).then(() => {
                 submitButton.disabled = false;
                 trigger.checked = true;
                 trigger.parentNode.style.color = 'green';
@@ -43,6 +49,7 @@ window.onload = function app() {
                 areYou.style.display = 'none';
             })
             .catch(() => {
+                console.log('foooo');
                 trigger.checked = false;
                 areYou.style.display = 'inline';
             });
