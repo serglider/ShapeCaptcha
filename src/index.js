@@ -2,25 +2,24 @@ import ShapeDetector from './shape';
 import resolver from './resolver';
 import methods from './methods';
 
-const defaults = {
-    timeout: 30, // sec
-    items: 5,
-    container: '',
-    font: 'sans-serif',
-    bgColor: '#000',
-    drawColor: '#FFFF00',
-    acceptColor: '#00FF00',
-    textColor: '#000',
-    textBgColor: '#CCC',
-    helperText: '',
-    drawLineWidth: 4,
-    successLineWidth: 8
-};
-
 class ShapeCaptchaClass {
 
     constructor(options) {
-        this.options = options;
+        this.options = {
+            timeout: 30, // sec
+            items: 5,
+            container: '',
+            font: 'sans-serif',
+            bgColor: '#000',
+            drawColor: '#FFFF00',
+            acceptColor: '#00FF00',
+            textColor: '#000',
+            textBgColor: '#CCC',
+            helperText: '',
+            drawLineWidth: 4,
+            successLineWidth: 8
+        };
+        if ( options ) this.setOptions(options);
         this.shapeDetector = new ShapeDetector();
         this.resolver = resolver.bind(this);
         for (let key of Object.keys(methods)) {
@@ -28,10 +27,10 @@ class ShapeCaptchaClass {
         }
     }
 
-    options(x, val) {
+    setOptions(x, val) {
         const setOption = (k, v) => {
             k = k.toString();
-            if ( this.options.hasOwnProperty(k) && typeof this.options[k] === typeof v ) {
+            if (this.options.hasOwnProperty(k) && typeof this.options[k] === typeof v) {
                 this.options[k] = v;
             }
         };
@@ -40,7 +39,7 @@ class ShapeCaptchaClass {
             Object.keys(x).forEach(k => {
                 setOption(k, x[k]);
             });
-        }else {
+        } else {
             setOption(x, val);
         }
     }
@@ -50,13 +49,11 @@ class ShapeCaptchaClass {
     }
 }
 
-export function start(opts) {
-    const options = Object.assign({}, defaults, opts);
+export function start(options) {
     const sc = new ShapeCaptchaClass(options);
     return new Promise(sc.resolver);
 }
 
-export function create(opts) {
-    const options = Object.assign({}, defaults, opts);
+export function create(options) {
     return new ShapeCaptchaClass(options);
 }

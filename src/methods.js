@@ -9,11 +9,12 @@ export default {
     },
 
     getSizes(container, ctx, text1) {
+        const fontFamily = this.options.font;
         let width, height;
-        if ( container === document.body ) {
+        if (container === document.body) {
             width = window.innerWidth - 4;
             height = window.innerHeight - 4;
-        }else {
+        } else {
             const bcr = container.getBoundingClientRect();
             width = bcr.width;
             height = bcr.height;
@@ -21,22 +22,22 @@ export default {
 
         let f1 = 0.05;
         let font1 = Math.round(height * f1);
-        ctx.font = `${font1}px sans-serif`;
+        ctx.font = `${font1}px ${fontFamily}`;
         while (ctx.measureText(text1).width > width) {
             f1 *= 0.95;
             font1 = Math.round(height * f1);
-            ctx.font = `${font1}px sans-serif`;
+            ctx.font = `${font1}px ${fontFamily}`;
         }
 
-        const text2 =  this.options.helperText;
+        const text2 = this.options.helperText;
         let f2 = 0.03;
         let font2 = Math.round(height * f2);
-        if ( text2 ) {
-            ctx.font = `${font2}px sans-serif`;
+        if (text2) {
+            ctx.font = `${font2}px ${fontFamily}`;
             while (ctx.measureText(text2).width > width) {
                 f2 *= 0.95;
                 font2 = Math.round(height * f2);
-                ctx.font = `${font2}px sans-serif`;
+                ctx.font = `${font2}px ${fontFamily}`;
             }
         }
         const text1Y = text2 ? Math.round(height * 0.07) : Math.round(height * 0.1);
@@ -64,15 +65,18 @@ export default {
     },
 
     drawTaskText(ctx, text) {
+        const fontFamily = this.options.font;
         const s = this.sizes.explanation;
-        ctx.fillStyle = this.options.textBgColor;
-        ctx.fillRect(0, 0, ctx.canvas.width, s.height);
+        if (this.options.textBgColor) {
+            ctx.fillStyle = this.options.textBgColor;
+            ctx.fillRect(0, 0, ctx.canvas.width, s.height);
+        }
         ctx.textAlign = 'center';
         ctx.fillStyle = this.options.textColor;
-        ctx.font = `${s.font1}px sans-serif`;
+        ctx.font = `${s.font1}px ${fontFamily}`;
         ctx.fillText(text, ctx.canvas.width / 2, s.text1Y);
-        if ( this.options.helperText ) {
-            ctx.font = `${s.font2}px sans-serif`;
+        if (this.options.helperText) {
+            ctx.font = `${s.font2}px ${fontFamily}`;
             ctx.fillText(this.options.helperText, ctx.canvas.width / 2, s.text2Y);
         }
     },
@@ -80,9 +84,9 @@ export default {
     getRandItemSet(n) {
         let items = ['circle', 'triangle', 'square'];
         let result = this.shuffle(items).reduce((acc, item, idx) => {
-            let total = Object.keys(acc).reduce((total, key) => {
-                total += acc[key];
-                return total;
+            let total = Object.keys(acc).reduce((sum, key) => {
+                sum += acc[key];
+                return sum;
             }, 0);
             let rest = n - total;
             if (idx === 2) {
@@ -133,12 +137,15 @@ export default {
     },
 
     getPathData(dots) {
-        const shape = this.shapeDetector.spot(dots);
-        const color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        let shape;
+        try {
+            shape = this.shapeDetector.spot(dots);
+        } catch (e) {
+            shape = null;
+        }
         return {
             shape,
-            dots,
-            color
+            dots
         };
     },
 

@@ -58,9 +58,12 @@ export default function resolver(resolve, reject) {
     }
 
     function drawScene(ctx, done) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         self.drawTaskText(ctx, taskText);
-        ctx.fillStyle = self.options.bgColor;
-        ctx.fillRect(0, self.sizes.explanation.height, canvas.width, canvas.height);
+        if (self.options.bgColor) {
+            ctx.fillStyle = self.options.bgColor;
+            ctx.fillRect(0, self.sizes.explanation.height, canvas.width, canvas.height);
+        }
         ctx.lineWidth = done ? self.options.successLineWidth : self.options.drawLineWidth;
         if (shapes.length) {
             shapes.forEach(item => {

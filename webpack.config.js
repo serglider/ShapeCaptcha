@@ -13,7 +13,7 @@ const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
     sourceMap: true
 });
 const cleanPlugin = new cleanWebpackPlugin(targets, {
-    exclude: ['app.js', 'index.html', 'dat-gui']
+    exclude: ['app.js', 'fontfaceobserver.standalone.js', 'index.html', 'dat-gui']
 });
 
 module.exports = env => {

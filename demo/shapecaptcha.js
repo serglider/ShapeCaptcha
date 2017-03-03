@@ -95,6 +95,7 @@ exports.default = {
         return container ? container : document.body;
     },
     getSizes: function getSizes(container, ctx, text1) {
+        var fontFamily = this.options.font;
         var width = void 0,
             height = void 0;
         if (container === document.body) {
@@ -108,22 +109,22 @@ exports.default = {
 
         var f1 = 0.05;
         var font1 = Math.round(height * f1);
-        ctx.font = font1 + 'px sans-serif';
+        ctx.font = font1 + 'px ' + fontFamily;
         while (ctx.measureText(text1).width > width) {
             f1 *= 0.95;
             font1 = Math.round(height * f1);
-            ctx.font = font1 + 'px sans-serif';
+            ctx.font = font1 + 'px ' + fontFamily;
         }
 
         var text2 = this.options.helperText;
         var f2 = 0.03;
         var font2 = Math.round(height * f2);
         if (text2) {
-            ctx.font = font2 + 'px sans-serif';
+            ctx.font = font2 + 'px ' + fontFamily;
             while (ctx.measureText(text2).width > width) {
                 f2 *= 0.95;
                 font2 = Math.round(height * f2);
-                ctx.font = font2 + 'px sans-serif';
+                ctx.font = font2 + 'px ' + fontFamily;
             }
         }
         var text1Y = text2 ? Math.round(height * 0.07) : Math.round(height * 0.1);
@@ -149,24 +150,27 @@ exports.default = {
         });
     },
     drawTaskText: function drawTaskText(ctx, text) {
+        var fontFamily = this.options.font;
         var s = this.sizes.explanation;
-        ctx.fillStyle = this.options.textBgColor;
-        ctx.fillRect(0, 0, ctx.canvas.width, s.height);
+        if (this.options.textBgColor) {
+            ctx.fillStyle = this.options.textBgColor;
+            ctx.fillRect(0, 0, ctx.canvas.width, s.height);
+        }
         ctx.textAlign = 'center';
         ctx.fillStyle = this.options.textColor;
-        ctx.font = s.font1 + 'px sans-serif';
+        ctx.font = s.font1 + 'px ' + fontFamily;
         ctx.fillText(text, ctx.canvas.width / 2, s.text1Y);
         if (this.options.helperText) {
-            ctx.font = s.font2 + 'px sans-serif';
+            ctx.font = s.font2 + 'px ' + fontFamily;
             ctx.fillText(this.options.helperText, ctx.canvas.width / 2, s.text2Y);
         }
     },
     getRandItemSet: function getRandItemSet(n) {
         var items = ['circle', 'triangle', 'square'];
         var result = this.shuffle(items).reduce(function (acc, item, idx) {
-            var total = Object.keys(acc).reduce(function (total, key) {
-                total += acc[key];
-                return total;
+            var total = Object.keys(acc).reduce(function (sum, key) {
+                sum += acc[key];
+                return sum;
             }, 0);
             var rest = n - total;
             if (idx === 2) {
@@ -213,12 +217,15 @@ exports.default = {
         ctx.stroke();
     },
     getPathData: function getPathData(dots) {
-        var shape = this.shapeDetector.spot(dots);
-        var color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        var shape = void 0;
+        try {
+            shape = this.shapeDetector.spot(dots);
+        } catch (e) {
+            shape = null;
+        }
         return {
             shape: shape,
-            dots: dots,
-            color: color
+            dots: dots
         };
     },
     getPointerPos: function getPointerPos(e) {
@@ -303,9 +310,12 @@ function resolver(resolve, reject) {
     }
 
     function drawScene(ctx, done) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         self.drawTaskText(ctx, taskText);
-        ctx.fillStyle = self.options.bgColor;
-        ctx.fillRect(0, self.sizes.explanation.height, canvas.width, canvas.height);
+        if (self.options.bgColor) {
+            ctx.fillStyle = self.options.bgColor;
+            ctx.fillRect(0, self.sizes.explanation.height, canvas.width, canvas.height);
+        }
         ctx.lineWidth = done ? self.options.successLineWidth : self.options.drawLineWidth;
         if (shapes.length) {
             shapes.forEach(function (item) {
@@ -2939,26 +2949,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var defaults = {
-    timeout: 30, // sec
-    items: 5,
-    container: '',
-    font: 'sans-serif',
-    bgColor: '#000',
-    drawColor: '#FFFF00',
-    acceptColor: '#00FF00',
-    textColor: '#000',
-    textBgColor: '#CCC',
-    helperText: '',
-    drawLineWidth: 4,
-    successLineWidth: 8
-};
-
 var ShapeCaptchaClass = function () {
     function ShapeCaptchaClass(options) {
         _classCallCheck(this, ShapeCaptchaClass);
 
-        this.options = options;
+        this.options = {
+            timeout: 30, // sec
+            items: 5,
+            container: '',
+            font: 'sans-serif',
+            bgColor: '#000',
+            drawColor: '#FFFF00',
+            acceptColor: '#00FF00',
+            textColor: '#000',
+            textBgColor: '#CCC',
+            helperText: '',
+            drawLineWidth: 4,
+            successLineWidth: 8
+        };
+        if (options) this.setOptions(options);
         this.shapeDetector = new _shape2.default();
         this.resolver = _resolver2.default.bind(this);
         var _iteratorNormalCompletion = true;
@@ -2988,8 +2997,8 @@ var ShapeCaptchaClass = function () {
     }
 
     _createClass(ShapeCaptchaClass, [{
-        key: 'options',
-        value: function options(x, val) {
+        key: 'setOptions',
+        value: function setOptions(x, val) {
             var _this = this;
 
             var setOption = function setOption(k, v) {
@@ -3017,14 +3026,12 @@ var ShapeCaptchaClass = function () {
     return ShapeCaptchaClass;
 }();
 
-function start(opts) {
-    var options = Object.assign({}, defaults, opts);
+function start(options) {
     var sc = new ShapeCaptchaClass(options);
     return new Promise(sc.resolver);
 }
 
-function create(opts) {
-    var options = Object.assign({}, defaults, opts);
+function create(options) {
     return new ShapeCaptchaClass(options);
 }
 
