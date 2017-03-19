@@ -2,7 +2,7 @@
 
 ## Introduction
 
-ShapeCaptcha is a not-a-bot test. Users are given an easy drawing task. They have to produce several geometric shapes: circles, triangles and rectangles. The total number of the shapes is configurable, but how many particular shapes is chosen randomly each time.
+ShapeCaptcha is a not-a-bot test. Users are given an easy drawing task. They have to produce several geometric shapes: circles, triangles and rectangles. One stroke for each. The total number of the shapes is configurable, but how many particular shapes is chosen randomly. ShapeCaptcha expects very approximate similarity to those geometric shapes.
 
 ## How it works
 
