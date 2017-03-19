@@ -231,8 +231,8 @@ exports.default = {
     getPointerPos: function getPointerPos(e) {
         var bcr = e.target.getBoundingClientRect();
         return {
-            x: e.pageX - bcr.left,
-            y: e.pageY - bcr.top
+            x: e.pageX - bcr.left - window.scrollX,
+            y: e.pageY - bcr.top - window.scrollY
         };
     }
 };
@@ -267,6 +267,10 @@ function resolver(resolve, reject) {
     this.sizes = this.getSizes(container, ctx, taskText);
     canvas.width = this.sizes.width;
     canvas.height = this.sizes.height;
+    if (!this.options.container) {
+        canvas.style.marginTop = window.scrollY + 'px';
+        canvas.style.marginLeft = window.scrollX + 'px';
+    }
     container.appendChild(canvas);
     drawScene(ctx);
     canvas.addEventListener('mousedown', setListeners);
@@ -2954,17 +2958,17 @@ var ShapeCaptchaClass = function () {
         _classCallCheck(this, ShapeCaptchaClass);
 
         this.options = {
-            timeout: 30, // sec
+            timeout: 30,
             items: 5,
             container: '',
             font: 'sans-serif',
-            bgColor: '#000',
-            drawColor: '#FFFF00',
-            acceptColor: '#00FF00',
-            textColor: '#000',
-            textBgColor: '#CCC',
+            bgColor: '#193441',
+            drawColor: '#91AA9D',
+            acceptColor: '#3E606F',
+            textColor: '#3E606F',
+            textBgColor: '#193441',
             helperText: '',
-            drawLineWidth: 4,
+            drawLineWidth: 8,
             successLineWidth: 8
         };
         if (options) this.setOptions(options);
