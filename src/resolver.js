@@ -17,6 +17,10 @@ export default function resolver(resolve, reject) {
     this.sizes = this.getSizes(container, ctx, taskText);
     canvas.width = this.sizes.width;
     canvas.height = this.sizes.height;
+    if (!this.options.container) {
+        canvas.style.marginTop = `${window.scrollY}px`;
+        canvas.style.marginLeft = `${window.scrollX}px`;
+    }
     container.appendChild(canvas);
     drawScene(ctx);
     canvas.addEventListener('mousedown', setListeners);

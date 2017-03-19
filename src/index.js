@@ -6,17 +6,17 @@ class ShapeCaptchaClass {
 
     constructor(options) {
         this.options = {
-            timeout: 30, // sec
+            timeout: 30,
             items: 5,
             container: '',
             font: 'sans-serif',
-            bgColor: '#000',
-            drawColor: '#FFFF00',
-            acceptColor: '#00FF00',
-            textColor: '#000',
-            textBgColor: '#CCC',
+            bgColor: '#193441',
+            drawColor: '#91AA9D',
+            acceptColor: '#3E606F',
+            textColor: '#3E606F',
+            textBgColor: '#193441',
             helperText: '',
-            drawLineWidth: 4,
+            drawLineWidth: 8,
             successLineWidth: 8
         };
         if ( options ) this.setOptions(options);

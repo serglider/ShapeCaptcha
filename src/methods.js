@@ -152,8 +152,8 @@ export default {
     getPointerPos(e) {
         const bcr = e.target.getBoundingClientRect();
         return {
-            x: e.pageX - bcr.left,
-            y: e.pageY - bcr.top
+            x: e.pageX - bcr.left - window.scrollX,
+            y: e.pageY - bcr.top - window.scrollY
         };
     }
 
