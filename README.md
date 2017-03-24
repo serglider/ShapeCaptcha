@@ -78,3 +78,7 @@ sc.setOptions("timeout", 60);
 sc.setOptions({timeout: 60});
 ```
 Play with settings on the [demo page](https://serglider.github.io/ShapeCaptcha/)
+
+## License
+
+ShapeCaptcha is available under the MIT license. See the [LICENCE](https://github.com/serglider/ShapeCaptcha/blob/master/LICENSE) file.
