@@ -7,7 +7,7 @@ class ShapeCaptchaClass {
     constructor(options) {
         this.options = {
             timeout: 30,
-            items: 5,
+            items: 2,
             container: '',
             font: 'sans-serif',
             bgColor: '#193441',
