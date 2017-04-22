@@ -1,6 +1,6 @@
 {
   "name": "shapecaptcha",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "later",
   "main": "dist/shapecaptcha.min.js",
   "scripts": {
